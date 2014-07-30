@@ -7,43 +7,57 @@ import java.util.regex.Matcher
  * http://www.techzoom.net/tools/payment-order-encoder.en
  */
 class EsrScanner {
-    static EsrPlus scan(String esrCodeLine) {
+    static Esr scan(String esrCodeLine) {
 
+        def esr = new Esr()
         def slipType = esrCodeLine.substring(0, 2)
-        def amount = esrCodeLine.substring(2, 12)
-        def amountValue = (amount as BigDecimal) / 100
+
+        def currency = isEuroPaymentSlip(slipType) ? Currency.getInstance('EUR') : Currency.getInstance('CHF')
+
+        if (paymentContainsAmount(slipType)) {
+            // payment slips containing the payment amount
+            def amount = esrCodeLine.substring(2, 12)
+            def amountValue = (amount as BigDecimal) / 100
+            esr.amount = new Amount(currency: currency, value: amountValue)
+        }
+        else {
+            esr.amount = new Amount(currency: currency, value: null)
+        }
 
         def refNumber = retrieveReferenceNumber(esrCodeLine)
         def accountNumber = retrieveAccountNumber(esrCodeLine)
 
-        def currency = slipType =~ '21' ? Currency.getInstance('EUR') : Currency.getInstance('CHF')
+        esr.referenceNumber = refNumber
+        esr.account = String.format('%1$02d-%2$d-%3$d',
+                accountNumber.substring(0, 2) as Integer,
+                accountNumber.substring(2, 8) as Integer,
+                accountNumber.substring(8) as Integer)
 
-        def esr = new Esr(
-                amount: new Amount(currency: currency, value: amountValue),
-                referenceNumber: refNumber,
-                // http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
-                account: String.format('%1$02d-%2$d-%3$d',
-                        accountNumber.substring(0, 2) as Integer,
-                        accountNumber.substring(2, 8) as Integer,
-                        accountNumber.substring(8) as Integer)
-        )
         return esr
     }
 
+    private static Matcher paymentContainsAmount(String slipType) {
+        slipType =~ /(01|11|21|23)/
+    }
+
+    private static Matcher isEuroPaymentSlip(String slipType) {
+        slipType =~ '(21|23|31)'
+    }
+
     private static String retrieveReferenceNumber(final String esrCodeLine) {
-        def referenceNumber = retrieveSubString(esrCodeLine, esrCodeLine =~ />(.*)\+/)
+        def referenceNumber = retrieveSubString(esrCodeLine =~ />(.*)\+/)
         return referenceNumber
     }
 
     private static String retrieveAccountNumber(final String esrCodeLine) {
-        def accountNumber = retrieveSubString(esrCodeLine, esrCodeLine =~ /\+(.*)>/).trim()
+        def accountNumber = retrieveSubString(esrCodeLine =~ /\+(.*)>/).trim()
         return accountNumber
     }
 
-    private static String retrieveSubString(final String esrCodeLine, Matcher regexMatcher) {
+    private static String retrieveSubString(Matcher regexMatcher) {
         if (regexMatcher.find()) {
             return regexMatcher.group().replaceAll(">", "").replaceAll("\\+", "")
         }
-        return null
+        throw new RuntimeException('Did not match')
     }
 }
