@@ -4,3 +4,12 @@ jdk:
   - openjdk7
   - oraclejdk7
   - oraclejdk8
+
+before_install:
+
+# Gradle
+- wget http://services.gradle.org/distributions/gradle-2.0-bin.zip
+- unzip gradle-2.0-bin.zip
+- export GRADLE_HOME=$PWD/gradle-2.0
+- export PATH=$GRADLE_HOME/bin:$PATH
+- gradle -version
