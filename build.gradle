@@ -1,0 +1,15 @@
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+    compile 'org.codehaus.groovy:groovy:2.3.5'
+}
