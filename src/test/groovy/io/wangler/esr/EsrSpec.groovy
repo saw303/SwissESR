@@ -9,7 +9,7 @@ import static io.wangler.esr.EsrScanner.scan
  */
 class EsrSpec extends Specification {
 
-    def "scan a ESR slips containing a payment amount"(String code, BigDecimal amountValue, Currency currency, String accountNumber, String referenceNumber) {
+    def "Interpret PostFinance ESR payment slips"(String code, BigDecimal amountValue, Currency currency, String accountNumber, String referenceNumber) {
 
         expect:
         def esr = scan code
@@ -28,6 +28,7 @@ class EsrSpec extends Specification {
         '319>961116900000006600000009284+ 030001625>'           | null                  | Currency.getInstance('EUR') | '03-162-5'    | '961116900000006600000009284'
         '1100003949754>210000000003139471430009017+ 010001628>' | 3949.75 as BigDecimal | Currency.getInstance('CHF') | '01-162-8'    | '210000000003139471430009017'
         '2300000440009>961116900000006600000009284+ 030001625>' | 440.00 as BigDecimal  | Currency.getInstance('EUR') | '03-162-5'    | '961116900000006600000009284'
-
+        '0100000104509>248869000154564400528736708+ 010040406>' | 104.50 as BigDecimal  | Currency.getInstance('CHF') | '01-4040-6'   | '248869000154564400528736708'
+        '0100000185159>100017334134978110100690007+ 010233764>' | 185.15 as BigDecimal  | Currency.getInstance('CHF') | '01-23376-4'  | '100017334134978110100690007'
     }
 }
