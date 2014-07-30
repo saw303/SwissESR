@@ -45,12 +45,12 @@ class EsrScanner {
     }
 
     private static String retrieveReferenceNumber(final String esrCodeLine) {
-        def referenceNumber = retrieveSubString(esrCodeLine =~ />(.*)\+/)
+        def referenceNumber = retrieveSubString(esrCodeLine =~ />(\d*)\+/)
         return referenceNumber
     }
 
     private static String retrieveAccountNumber(final String esrCodeLine) {
-        def accountNumber = retrieveSubString(esrCodeLine =~ /\+(.*)>/).trim()
+        def accountNumber = retrieveSubString(esrCodeLine =~ /\+ (\d*)>/).trim()
         return accountNumber
     }
 
