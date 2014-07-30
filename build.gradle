@@ -1,7 +1,17 @@
 apply plugin: 'groovy'
+apply plugin: 'com.jfrog.artifactory'
 
 sourceCompatibility = 1.7
 version = '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.0.1"
+    }
+}
 
 repositories {
     jcenter()
@@ -12,4 +22,20 @@ dependencies {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
     compile 'org.codehaus.groovy:groovy:2.3.5'
+}
+
+artifactory {
+    contextUrl = 'http://repo.wangler.io'
+    publish {
+        repository {
+            repoKey = 'libs-release-local'
+            username = ''
+            password = ''
+        }
+    }
+    // Redefine basic properties of the build info object
+    clientConfig.setIncludeEnvVars(true)
+    clientConfig.info.addEnvironmentProperty('test.adding.dynVar',new java.util.Date().toString())
+    clientConfig.info.setBuildName('SwissESR')
+    clientConfig.info.setBuildNumber('' + new java.util.Random(System.currentTimeMillis()).nextInt(20000))
 }
