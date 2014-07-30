@@ -3,7 +3,6 @@ language: groovy
 jdk:
   - openjdk7
   - oraclejdk7
-  - oraclejdk8
 
 before_install:
 
@@ -13,3 +12,8 @@ before_install:
 - export GRADLE_HOME=$PWD/gradle-2.0
 - export PATH=$GRADLE_HOME/bin:$PATH
 - gradle -version
+
+script:
+
+- gradle --daemon assemble
+- gradle --daemon check
