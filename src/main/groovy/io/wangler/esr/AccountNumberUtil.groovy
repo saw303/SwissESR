@@ -6,6 +6,8 @@ package io.wangler.esr
  */
 class AccountNumberUtil {
 
+    //https://www.postfinance.ch/binp/postfinance/public/dam.7WVz5HV3I7Lnw9nUa0-i4Zv-lMxIR4ilETelHK5VeCo.spool/content/dam/pf/de/doc/consult/manual/dldata/efin_recdescr_man_de.pdf
+
     private static final map = [
             0: [0, 9, 4, 6, 8, 2, 7, 1, 3, 5, 0],
             1: [9, 4, 6, 8, 2, 7, 1, 3, 5, 0, 9],
