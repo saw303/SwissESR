@@ -5,7 +5,10 @@ package io.wangler.esr
  */
 class EsrUtil {
 
-    //https://www.postfinance.ch/binp/postfinance/public/dam.7WVz5HV3I7Lnw9nUa0-i4Zv-lMxIR4ilETelHK5VeCo.spool/content/dam/pf/de/doc/consult/manual/dldata/efin_recdescr_man_de.pdf
+    /*
+    https://www.postfinance.ch/binp/postfinance/public/dam.7WVz5HV3I7Lnw9nUa0-i4Zv-lMxIR4ilETelHK5VeCo.spool/content/dam/pf/de/doc/consult/manual/dldata/efin_recdescr_man_de.pdf
+    http://www.wins.ch/esr01.html
+     */
 
     private static final list = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
 
