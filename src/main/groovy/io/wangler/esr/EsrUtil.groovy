@@ -8,18 +8,7 @@ class EsrUtil {
 
     //https://www.postfinance.ch/binp/postfinance/public/dam.7WVz5HV3I7Lnw9nUa0-i4Zv-lMxIR4ilETelHK5VeCo.spool/content/dam/pf/de/doc/consult/manual/dldata/efin_recdescr_man_de.pdf
 
-    private static final map = [
-            0: [0, 9, 4, 6, 8, 2, 7, 1, 3, 5, 0],
-            1: [9, 4, 6, 8, 2, 7, 1, 3, 5, 0, 9],
-            2: [4, 6, 8, 2, 7, 1, 3, 5, 0, 9, 8],
-            3: [6, 8, 2, 7, 1, 3, 5, 0, 9, 4, 7],
-            4: [8, 2, 7, 1, 3, 5, 0, 9, 4, 6, 6],
-            5: [2, 7, 1, 3, 5, 0, 9, 4, 6, 8, 5],
-            6: [7, 1, 3, 5, 0, 9, 4, 6, 8, 2, 4],
-            7: [1, 3, 5, 0, 9, 4, 6, 8, 2, 7, 3],
-            8: [3, 5, 0, 9, 4, 6, 8, 2, 7, 1, 2],
-            9: [5, 0, 9, 4, 6, 8, 2, 7, 1, 3, 1]
-    ]
+    private static final list = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
 
     static boolean isAccountNumberValid(final String postFinanceAccountNumber) {
 
@@ -35,13 +24,13 @@ class EsrUtil {
         copy.eachWithIndex { character, index ->
 
             if (character.isInteger() && processedIntegers < 8) {
-                mapIndex = map[mapIndex][character as int]
+                mapIndex = list[((mapIndex + character.toInteger()) % 10)]
                 processedIntegers++
             }
         }
 
         if (processedIntegers == 8) {
-            return copy.endsWith(map[mapIndex][10] as String)
+            return copy.endsWith(((10 - mapIndex) % 10) as String)
         }
         return false
     }
@@ -49,7 +38,7 @@ class EsrUtil {
     static String formatAccountNumber(String accountNumber) {
         if (isValidAccountNumberFormat(accountNumber)) {
             def tokens = accountNumber.split('-')
-            return String.format('%1$02d-%2$06d-%3$d', tokens[0] as int, tokens[1] as int, tokens[2] as int)
+            return String.format('%1$02d-%2$06d-%3$d', tokens[0].toInteger(), tokens[1].toInteger(), tokens[2].toInteger())
         }
         return accountNumber
     }
@@ -58,17 +47,9 @@ class EsrUtil {
         return accountNumber ==~ /\d{1,2}-\d{1,6}-\d/
     }
 
-    static boolean isReferenceNumberValid(String referenceNumber) {
-
-        def mapIndex = 0
-
-        referenceNumber.eachWithIndex { potentialNumber, index ->
-            if (potentialNumber.isInteger() && index < referenceNumber.length() - 1) {
-                mapIndex = map[mapIndex][potentialNumber as int]
-            }
-        }
-
-        return referenceNumber.endsWith(mapIndex as String)
+    static boolean isReferenceNumberValid(String referenceNumberContainingCheckDigit) {
+        def refNumberWithoutCheckDigit = referenceNumberContainingCheckDigit.substring(0, referenceNumberContainingCheckDigit.length() - 1)
+        return generateRefNumberWithCheckDigit(refNumberWithoutCheckDigit) == referenceNumberContainingCheckDigit
     }
 
     static String generateRefNumberWithCheckDigit(String referenceNumberWithoutCheckDigit) {
@@ -79,7 +60,7 @@ class EsrUtil {
         number.eachWithIndex { potentialNumber, index ->
             if (potentialNumber.isInteger()) {
                 def sum = potentialNumber.toInteger() + mapIndex
-                mapIndex = map[0][sum % 10]
+                mapIndex = list[sum % 10]
             }
         }
 

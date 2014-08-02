@@ -50,8 +50,8 @@ class EsrUtilSpec extends Specification {
         isReferenceNumberValid(refNumber) == expectedResult
 
         where:
-        refNumber          | expectedResult
-        '0000000999988885' | TRUE
+        refNumber                     | expectedResult
+        '000000000000000000999988885' | TRUE
     }
 
     def "Generate reference number with check digit"(String refNumber, String expectedResult) {
