@@ -2,7 +2,6 @@ package io.wangler.esr
 
 /**
  * @author Silvio Wangler
- * @since 0.3
  */
 class EsrUtil {
 
