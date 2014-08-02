@@ -2,15 +2,17 @@ package io.wangler.esr
 
 import spock.lang.Specification
 
-import static io.wangler.esr.AccountNumberUtil.formatAccountNumber
-import static io.wangler.esr.AccountNumberUtil.isValid
+import static EsrUtil.formatAccountNumber
+import static EsrUtil.isAccountNumberValid
+import static io.wangler.esr.EsrUtil.generateRefNumberWithCheckDigit
+import static io.wangler.esr.EsrUtil.isReferenceNumberValid
 import static java.lang.Boolean.FALSE
 import static java.lang.Boolean.TRUE
 
 /**
  * @author Silvio Wangler
  */
-class AccountNumberUtilSpec extends Specification {
+class EsrUtilSpec extends Specification {
 
     def "correct account numbers"(String actualAccountNumber, String expectedAccountNumber) {
         expect:
@@ -29,7 +31,7 @@ class AccountNumberUtilSpec extends Specification {
 
         expect:
 
-        isValid(postAccountNumber) == expectedResult
+        isAccountNumberValid(postAccountNumber) == expectedResult
 
         where:
 
@@ -40,5 +42,26 @@ class AccountNumberUtilSpec extends Specification {
         '01-162-8'        | TRUE
         '60-4586-5'       | TRUE
         '61-4586-5'       | FALSE
+    }
+
+    def "Validate reference number"(String refNumber, Boolean expectedResult) {
+
+        expect:
+        isReferenceNumberValid(refNumber) == expectedResult
+
+        where:
+        refNumber          | expectedResult
+        '0000000999988885' | TRUE
+    }
+
+    def "Generate reference number with check digit"(String refNumber, String expectedResult) {
+        expect:
+        generateRefNumberWithCheckDigit(refNumber) == expectedResult
+
+        where:
+        refNumber  | expectedResult
+        '99998888' | '000000000000000000999988885'
+        '123333'   | '000000000000000000001233331'
+        '123'      | '000000000000000000000001236'
     }
 }

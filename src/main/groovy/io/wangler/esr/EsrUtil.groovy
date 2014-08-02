@@ -4,7 +4,7 @@ package io.wangler.esr
  * @author Silvio Wangler
  * @since 0.3
  */
-class AccountNumberUtil {
+class EsrUtil {
 
     //https://www.postfinance.ch/binp/postfinance/public/dam.7WVz5HV3I7Lnw9nUa0-i4Zv-lMxIR4ilETelHK5VeCo.spool/content/dam/pf/de/doc/consult/manual/dldata/efin_recdescr_man_de.pdf
 
@@ -21,7 +21,7 @@ class AccountNumberUtil {
             9: [5, 0, 9, 4, 6, 8, 2, 7, 1, 3, 1]
     ]
 
-    static boolean isValid(final String postFinanceAccountNumber) {
+    static boolean isAccountNumberValid(final String postFinanceAccountNumber) {
 
         def mapIndex = 0
         def processedIntegers = 0
@@ -56,5 +56,35 @@ class AccountNumberUtil {
 
     private static boolean isValidAccountNumberFormat(String accountNumber) {
         return accountNumber ==~ /\d{1,2}-\d{1,6}-\d/
+    }
+
+    static boolean isReferenceNumberValid(String referenceNumber) {
+
+        def mapIndex = 0
+
+        referenceNumber.eachWithIndex { potentialNumber, index ->
+            if (potentialNumber.isInteger() && index < referenceNumber.length() - 1) {
+                mapIndex = map[mapIndex][potentialNumber as int]
+            }
+        }
+
+        return referenceNumber.endsWith(mapIndex as String)
+    }
+
+    static String generateRefNumberWithCheckDigit(String referenceNumberWithoutCheckDigit) {
+        def mapIndex = 0
+
+        def number = String.format('%1$026d', referenceNumberWithoutCheckDigit.toInteger())
+
+        number.eachWithIndex { potentialNumber, index ->
+            if (potentialNumber.isInteger()) {
+                def sum = potentialNumber.toInteger() + mapIndex
+                mapIndex = map[0][sum % 10]
+            }
+        }
+
+        def final checkDigit = (10 - mapIndex) % 10
+
+        return "${number}${checkDigit}".toString()
     }
 }
