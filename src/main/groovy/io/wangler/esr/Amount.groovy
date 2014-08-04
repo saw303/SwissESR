@@ -1,8 +1,8 @@
 package io.wangler.esr
 
-/**
- * Created by SWangler on 30.07.2014.
- */
+import groovy.transform.Canonical
+
+@Canonical
 class Amount {
     Currency currency
     BigDecimal value
