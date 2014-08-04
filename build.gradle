@@ -29,3 +29,4 @@ dependencies {
     compile 'org.codehaus.groovy:groovy:2.3.5'
 }
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
+cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
