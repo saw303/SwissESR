@@ -1,4 +1,6 @@
 apply plugin: 'groovy'
+apply plugin: 'cobertura'
+apply plugin: 'com.github.kt3k.coveralls'
 
 sourceCompatibility = 1.7
 version = '1.0'
@@ -7,9 +9,23 @@ repositories {
     jcenter()
 }
 
+buildscript {
+
+	repositories {
+        mavenCentral()
+		jcenter()
+    }
+
+	dependencies {		
+		classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+	}
+}
+
 dependencies {
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
     compile 'org.codehaus.groovy:groovy:2.3.5'
 }
+cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report

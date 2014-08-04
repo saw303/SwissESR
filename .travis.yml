@@ -8,3 +8,9 @@ before_install:
 
 # Gradle
 - chmod +x gradlew
+
+env:
+- TERM=dumb
+
+after_success:
+- ./gradlew cobertura coveralls
