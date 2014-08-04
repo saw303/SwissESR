@@ -83,10 +83,11 @@ class EsrUtilSpec extends Specification {
         generateRefNumberWithCheckDigit(refNumber) == expectedResult
 
         where:
-        refNumber  | expectedResult
-        '99998888' | '000000000000000000999988885'
-        '123333'   | '000000000000000000001233331'
-        '123'      | '000000000000000000000001236'
+        refNumber          | expectedResult
+        '99998888'         | '0000000999988885'
+        '123333'           | '0000000001233331'
+        '123'              | '0000000000001236'
+        '7667667676765447' | '000000000076676676767654472'
     }
 
     def "Create ESR code line"(Currency currency, BigDecimal amount, String referenceNumber, String accountNumber, String expectedResult) {
@@ -97,6 +98,6 @@ class EsrUtilSpec extends Specification {
         where:
         currency                    | amount                | referenceNumber                   | accountNumber | expectedResult
         Currency.getInstance('CHF') | 100.0 as BigDecimal   | '80 58140 00000 00000 05000 7200' | '01-001525-2' | '0100000100009>805814000000000000500072001+ 010015252>'
-        //Currency.getInstance('CHF') | 9995.60 as BigDecimal | '12345678901'                     | '01-001525-2' | '0100009995609>0000123456789017+ 010015252>'
+        Currency.getInstance('CHF') | 9995.60 as BigDecimal | '12345678901'                     | '01-001525-2' | '0100009995609>0000123456789017+ 010015252>'
     }
 }

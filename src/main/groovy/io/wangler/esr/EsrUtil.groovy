@@ -62,7 +62,7 @@ class EsrUtil {
     static String generateRefNumberWithCheckDigit(String referenceNumberWithoutCheckDigit) {
         def mapIndex = 0
 
-        def number = String.format('%1$026d', referenceNumberWithoutCheckDigit.toBigInteger())
+        def number = String.format(referenceNumberWithoutCheckDigit.length() <=15 ? '%1$015d' :  '%1$026d', referenceNumberWithoutCheckDigit.toBigInteger())
 
         number.eachWithIndex { String potentialNumber, int index ->
             if (potentialNumber.isNumber()) {
@@ -113,6 +113,7 @@ class EsrUtil {
     }
 
     private static String retrieveReferenceNumber(final String esrCodeLine) {
+        println esrCodeLine
         def referenceNumber = retrieveSubString(esrCodeLine =~ />(\d*)\+/)
         return referenceNumber
     }
