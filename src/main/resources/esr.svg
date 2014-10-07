@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="779.52753"
+   height="375.59055"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="esr.svg">
+  <title
+     id="title3031">ESR der PostFinance</title>
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4.5027275"
+     inkscape:cx="632.24246"
+     inkscape:cy="159.58329"
+     inkscape:document-units="in"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="mm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="51"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3006"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="129.28571,59.285714"
+       id="guide3008" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="751.3224,147.24409"
+       id="guide2994" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="180,75"
+       id="guide2996" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="742.4389,122.37028"
+       id="guide3027" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="733.3333,105.93579"
+       id="guide3029" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>ESR der PostFinance</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Silvio Wangler</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>PostFinance</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier></dc:identifier>
+        <dc:relation></dc:relation>
+        <dc:source>https://www.postfinance.ch/binp/postfinance/public/dam.A4Vu2XGJP1lO0Scg4a6lp0ijq0wFJCscFgV3OGPoPv4.spool/content/dam/pf/de/doc/consult/templ/example/44218_templ_de_fr_it.pdf</dc:source>
+        <cc:license
+           rdf:resource="" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-676.76915)">
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
+       x="731.33331"
+       y="993.07397"
+       id="text3002"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3004"
+         x="731.33331"
+         y="993.07397">9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
+       x="778.26978"
+       y="945.08527"
+       id="text3002-0"
+       sodipodi:linespacing="125%"
+       transform="scale(0.95167663,1.0507771)"><tspan
+         sodipodi:role="line"
+         id="tspan3004-7"
+         x="778.26978"
+         y="945.08527">&gt;</tspan></text>
+  </g>
+</svg>

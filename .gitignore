@@ -3,3 +3,6 @@
 gradle.properties
 build
 .gradle
+
+# Ingore Inkscape backup files
+src/main/resources/esr.svg.*.svg
