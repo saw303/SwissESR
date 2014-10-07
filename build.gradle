@@ -3,17 +3,21 @@ apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
 
 sourceCompatibility = 1.7
+targetCompatibility = 1.7
 version = '1.0'
 
 repositories {
-    jcenter()
+    maven {
+        url 'http://repo.wangler.io/repo'
+    }
 }
 
 buildscript {
 
 	repositories {
-        mavenCentral()
-		jcenter()
+        maven {
+            url 'http://repo.wangler.io/repo'
+        }
     }
 
 	dependencies {		
@@ -26,7 +30,7 @@ dependencies {
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
-    compile 'org.codehaus.groovy:groovy:2.3.5'
+    compile 'org.codehaus.groovy:groovy-all:2.3.7'
 }
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
 cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
