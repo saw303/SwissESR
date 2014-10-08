@@ -26,17 +26,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.5027275"
-     inkscape:cx="632.24246"
-     inkscape:cy="159.58329"
+     inkscape:zoom="42.34708"
+     inkscape:cx="731.72539"
+     inkscape:cy="68.880963"
      inkscape:document-units="in"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
-     inkscape:window-width="1920"
-     inkscape:window-height="1056"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
      inkscape:window-x="0"
-     inkscape:window-y="51"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true">
@@ -87,8 +87,8 @@
             <dc:title>PostFinance</dc:title>
           </cc:Agent>
         </dc:publisher>
-        <dc:identifier></dc:identifier>
-        <dc:relation></dc:relation>
+        <dc:identifier />
+        <dc:relation />
         <dc:source>https://www.postfinance.ch/binp/postfinance/public/dam.A4Vu2XGJP1lO0Scg4a6lp0ijq0wFJCscFgV3OGPoPv4.spool/content/dam/pf/de/doc/consult/templ/example/44218_templ_de_fr_it.pdf</dc:source>
         <cc:license
            rdf:resource="" />
@@ -100,28 +100,50 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-676.76915)">
+     <text
+         xml:space="preserve"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
+         x="722.14832"
+         y="992.84155"
+         id="text3002-3"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="code-51"
+           x="722.14832"
+           y="992.84155">8</tspan></text>
+     <text
+        xml:space="preserve"
+        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
+        x="722.14832"
+        y="992.84155"
+        id="text3002-3"
+        sodipodi:linespacing="125%"><tspan
+          sodipodi:role="line"
+          id="code-51"
+          x="722.14832"
+          y="992.84155">9</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
-       x="731.33331"
-       y="993.07397"
+       x="731.38055"
+       y="992.83777"
        id="text3002"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3004"
-         x="731.33331"
-         y="993.07397">9</tspan></text>
+         id="code-52"
+         x="731.38055"
+         y="992.83777">9</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OCRB;-inkscape-font-specification:OCRB"
-       x="778.26978"
+       x="778.41864"
        y="945.08527"
        id="text3002-0"
        sodipodi:linespacing="125%"
        transform="scale(0.95167663,1.0507771)"><tspan
          sodipodi:role="line"
-         id="tspan3004-7"
-         x="778.26978"
+         id="code-53"
+         x="778.41864"
          y="945.08527">&gt;</tspan></text>
   </g>
 </svg>
