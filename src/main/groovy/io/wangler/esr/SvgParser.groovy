@@ -15,10 +15,10 @@ class SvgParser {
         def allRecords = root.depthFirst().findAll { it.name().qualifiedName == 'tspan' && it.text()}
 
         for (record in allRecords) {
-            println "id: ${record.@id}, element:${record.name().qualifiedName}, value ${record.text()}"
+            println "${record.@id}: ${record.text()}"
             //record.value = 'yolo'
         }
 
-        new XmlNodePrinter(new PrintWriter(System.out)).print(root)
+        //new XmlNodePrinter(new PrintWriter(System.out)).print(root)
     }
 }
