@@ -8,6 +8,9 @@ before_install:
 
 # Gradle
 - chmod +x gradlew
+- touch gradle.properties
+- echo "bintrayUser=''" >> gradle.properties
+- echo "bintrayKey=''" >> gradle.properties
 
 env:
 - TERM=dumb
