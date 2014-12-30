@@ -1,10 +1,14 @@
 apply plugin: 'groovy'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
-version = '1.0'
+version = '0.1'
+group = 'ch.silviowangler'
 
 repositories {
     maven {
@@ -23,6 +27,8 @@ buildscript {
 	dependencies {		
 		classpath 'net.saliman:gradle-cobertura-plugin:2.2.4' // cobertura plugin
 		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
 	}
 }
 
@@ -34,3 +40,113 @@ dependencies {
 }
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
 cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
+
+jar {
+    manifest {
+        attributes(
+                'Built-By': "Gradle ${gradle.gradleVersion}",
+                'Implementation-Title': "SwissESR-${project.name}",
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Silvio Wangler',
+                'Specification-Vendor': 'Silvio Wangler',
+                'Specification-Title': "SwissESR-${project.name}",
+                'Specification-Version': project.version
+        )
+    }
+
+    from("${rootProject.projectDir}") {
+        include "LICENSE.txt"
+        into "META-INF"
+        expand(dateOfYear: new Date().format('yyyy'))
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+
+    from("${rootProject.projectDir}") {
+        include "LICENSE.txt"
+        into "META-INF"
+        expand(dateOfYear: new Date().format('yyyy'))
+    }
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        customizePom(pom, project)
+    }
+}
+
+bintray {
+    user = bintrayUser //this usually comes form gradle.properties file in ~/.gradle
+    key = bintrayKey //this usually comes form gradle.properties file in ~/.gradle
+    publications = ['mavenJava'] // see publications closure
+    pkg { //package will be created if does not exist
+        repo = 'releases'
+        name = 'swissesr'
+        desc = 'Package created from SwissESR'
+        licenses = ['Apache-2.0']
+        labels = ['ESR', 'java', 'PostFinance']
+    }
+}
+
+def customizePom(pom, gradleProject) {
+    pom.whenConfigured { generatedPom ->
+
+        // eliminate test-scoped dependencies (no need in maven central poms)
+        generatedPom.dependencies.removeAll { dep ->
+            dep.scope == 'test'
+        }
+
+        // add all items necessary for maven central publication
+        generatedPom.project {
+            name = gradleProject.description
+            description = gradleProject.description
+            url = 'https://github.com/saw303/SwissESR'
+            organization {
+                name = 'Wangler Software Development'
+                url = 'http://saw303.github.io/SwissESR/'
+            }
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url = 'https://github.com/saw303/SwissESR'
+                connection = 'scm:git:git://github.com/saw303/SwissESR'
+                developerConnection = 'scm:git:git://github.com/saw303/SwissESR'
+            }
+            developers {
+                developer {
+                    id = 'saw303'
+                    name = 'Silvio Wangler'
+                    email = 'silvio.wangler@gmail.com'
+                }
+            }
+            issueManagement {
+                system = 'Github'
+                url = 'https://github.com/saw303/SwissESR/issues'
+            }
+        }
+    }
+}
