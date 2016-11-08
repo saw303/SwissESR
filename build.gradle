@@ -4,6 +4,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.ben-manes.versions'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -11,32 +12,28 @@ version = '0.2-SNAPSHOT'
 group = 'ch.silviowangler'
 
 repositories {
-    maven {
-        url 'http://repo.wangler.io/repo'
-    }
+    jcenter()
 }
 
 buildscript {
 
 	repositories {
-        maven {
-            url 'http://repo.wangler.io/repo'
-        }
-    }
+        jcenter()
+  }
 
-	dependencies {		
-		classpath 'net.saliman:gradle-cobertura-plugin:2.2.4' // cobertura plugin
-		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
+	dependencies {
+		classpath 'net.saliman:gradle-cobertura-plugin:2.3.2'
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
 	}
 }
 
 dependencies {
-    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+    testCompile('org.spockframework:spock-core:1.1-groovy-2.4-rc-3') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
-    compile 'org.codehaus.groovy:groovy-all:2.3.7'
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
 }
 cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
 cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
