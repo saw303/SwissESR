@@ -1,6 +1,7 @@
 package io.wangler.esr
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static EsrUtil.formatAccountNumber
 import static EsrUtil.isAccountNumberValid
@@ -14,7 +15,8 @@ import static java.util.Currency.getInstance
  */
 class EsrUtilSpec extends Specification {
 
-    def "Interpret PostFinance ESR payment slips"(String code, BigDecimal amountValue, Currency currency, String accountNumber, String referenceNumber) {
+    @Unroll
+    def "Interpret PostFinance ESR payment slips '#code' results in '#referenceNumber'"() {
 
         expect:
         def esr = scan code
@@ -38,7 +40,8 @@ class EsrUtilSpec extends Specification {
         '0100000002852>000000021009384900197001017+ 010438848>' | 2.85 as BigDecimal    | getInstance('CHF') | '01-43884-8'  | '000000021009384900197001017'
     }
 
-    def "correct account numbers"(String actualAccountNumber, String expectedAccountNumber) {
+    @Unroll
+    def "Transform #actualAccountNumber in displayable account number #expectedAccountNumber"() {
         expect:
         formatAccountNumber(actualAccountNumber) == expectedAccountNumber
 
@@ -51,7 +54,8 @@ class EsrUtilSpec extends Specification {
         '60-4586-5'         | '60-004586-5'
     }
 
-    def "validation PostFinance account numbers"(String postAccountNumber, Boolean expectedResult) {
+    @Unroll
+    def "Validation PostFinance account number #postAccountNumber"() {
 
         expect:
 
@@ -68,7 +72,8 @@ class EsrUtilSpec extends Specification {
         '61-4586-5'       | FALSE
     }
 
-    def "Validate reference number"(String refNumber, Boolean expectedResult) {
+    @Unroll
+    def "Validate reference number #refNumber"() {
 
         expect:
         isReferenceNumberValid(refNumber) == expectedResult
@@ -78,7 +83,8 @@ class EsrUtilSpec extends Specification {
         '000000000000000000999988885' | TRUE
     }
 
-    def "Generate reference number with check digit"(String refNumber, String expectedResult) {
+    @Unroll
+    def "Generating reference number from #refNumber with check digit results in #expectedResult"() {
         expect:
         generateRefNumberWithCheckDigit(refNumber) == expectedResult
 
@@ -90,10 +96,11 @@ class EsrUtilSpec extends Specification {
         '7667667676765447' | '000000000076676676767654472'
     }
 
-    def "Create ESR code line"(Currency currency, BigDecimal amount, String referenceNumber, String accountNumber, String expectedResult) {
+    @Unroll
+    def "Create ESR code line #expectedResult"() {
 
         expect:
-        generateCodeLine(new Amount(currency: currency, value: amount), referenceNumber, accountNumber) == expectedResult
+        generateCodeLine(new Amount(currency, amount), referenceNumber, accountNumber) == expectedResult
 
         where:
         currency                    | amount                | referenceNumber                   | accountNumber | expectedResult

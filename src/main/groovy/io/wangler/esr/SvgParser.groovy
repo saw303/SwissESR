@@ -6,7 +6,7 @@ package io.wangler.esr
  */
 class SvgParser {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
         def resource = SvgParser.class.getResource('/esr.svg')
 

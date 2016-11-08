@@ -1,13 +1,15 @@
 package io.wangler.esr
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 /**
  * Created by SWangler on 31.07.2014.
  */
 class OcrSpec extends Specification {
 
-    def "read PostFinance payment slip code from OCR output"(InputStream inputStream, String esrCode) {
+    @Unroll
+    def "read PostFinance payment slip code from OCR output #esrCode"() {
         given:
         def ocrInterpreter = new OcrInterpreter()
 
