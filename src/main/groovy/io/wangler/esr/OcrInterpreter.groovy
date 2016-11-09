@@ -1,10 +1,13 @@
 package io.wangler.esr
 
+import groovy.transform.CompileStatic
+
 import java.util.regex.Matcher
 
 /**
  * Created by SWangler on 31.07.2014.
  */
+@CompileStatic
 class OcrInterpreter {
     String findEsrCode(InputStream inputStream) {
         def content = inputStream.text
